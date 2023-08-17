@@ -3,9 +3,8 @@ import os
 from pathlib import Path
 
 example_files = os.listdir('tests/examples')
-
-
-for file in example_files:
+for i in range(len(example_files)):
+    file = example_files[i]
     print(f"Running tests for {file}")
     process = subprocess.run(["python", "vulnerabilities_scanner.py", f'tests/examples/{file}'])
     exit_code = process.returncode
