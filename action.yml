@@ -4,6 +4,9 @@ inputs:
   files:
     description: 'List of files to scan'
     required: true
+  workspace:
+    description: 'GitHub workspace directory'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -12,5 +15,3 @@ runs:
     - '-c'
     - |
       python /app/vulnerabilities_scanner.py ${{ join(inputs.files, ' ') }}
-  env:
-    GITHUB_WORKSPACE: ${{ github.workspace }}
