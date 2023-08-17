@@ -23,5 +23,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: List example files
+      id: list-files
+      run: |
+        echo "::set-output name=files::$(find examples -type f)"
+
     - name: Run tests
-      run: python vulnerabilities_scanner.py
+      run: |
+        for file in ${{ steps.list-files.outputs.files }}; do
+          echo "Running tests for $file"
+          python vulnerabilities_scanner.py "$file"
+        done
