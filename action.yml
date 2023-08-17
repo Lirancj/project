@@ -6,7 +6,7 @@ inputs:
     required: true
 runs:
   using: 'docker'
-  image: 'python:3.8'
+  image: 'docker://python:3.8'
   entrypoint: 'bash'
   args:
     - '-c'
