@@ -14,4 +14,5 @@ runs:
   args:
     - '-c'
     - |
-      python /app/vulnerabilities_scanner.py ${{ join(inputs.files, ' ') }}
+      files_array=($(echo '${{ toJson(inputs.files) }}' | jq -r '.[]'))
+      python /app/vulnerabilities_scanner.py "${files_array[@]}"
