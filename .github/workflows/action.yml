@@ -1,0 +1,15 @@
+name: File Scanning Action
+description: Scan files using a Python script
+inputs:
+  files:
+    description: 'List of files to scan'
+    required: true
+runs:
+  using: 'docker'
+  image: 'python:3.8'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      pip install -r requirements.txt
+      python vulnerabilities_scanner.py ${{ join(inputs.files, ' ') }}
