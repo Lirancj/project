@@ -1,7 +1,10 @@
 import subprocess
 import os
+from pathlib import Path
 
-example_files = os.listdir('examples')
+examples_path = Path(os.getcwd()) / 'examples'
+
+example_files = os.listdir(examples_path)
 
 for file in example_files:
     print(f"Running tests for {file}")
