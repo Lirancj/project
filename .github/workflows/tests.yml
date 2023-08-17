@@ -23,20 +23,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: List example files
-      id: list-files
-      run: |
-        echo "::set-output name=files::$(find examples -type f)"
-
     - name: Run tests
       run: |
-        for file in ${{ steps.list-files.outputs.files }}; do
-          echo "Running tests for $file"
-          python vulnerabilities_scanner.py "$file"
-          exit_code=$?
-          echo "Exit code for $file: $exit_code"
-          if [ $exit_code -ne 1 ]; then
-            echo "Vulnerability was not detected in $file"
-            exit 1
-          fi
-        done
+        python tests/tester.py

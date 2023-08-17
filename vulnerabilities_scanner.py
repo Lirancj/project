@@ -145,15 +145,11 @@ def run_xxe_vulnerabilities_check(file_path: Path):
 
 def main():
     files_to_scan = sys.argv[1:]
-    try:
-        for file in files_to_scan:
-            file_path = Path(file)
-            if not file_path.is_file():
-                raise FileNotFoundError(f"File {file} does not exist.")
-            run_all_tests(file_path)
-    except VulnerableCodeException as vce:
-        print(f'Vulnerability detected: {vce}')
-        exit(1)
+    for file in files_to_scan:
+        file_path = Path(file)
+        if not file_path.is_file():
+            raise FileNotFoundError(f"File {file} does not exist.")
+        run_all_tests(file_path)
 
 
 if __name__ == "__main__":
