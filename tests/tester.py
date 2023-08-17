@@ -2,13 +2,11 @@ import subprocess
 import os
 from pathlib import Path
 
-examples_path = Path(os.getcwd()) / 'examples'
-
-example_files = os.listdir(examples_path)
+example_files = os.listdir('tests/examples')
 
 for file in example_files:
     print(f"Running tests for {file}")
-    process = subprocess.run(["python", "/vulnerabilities_scanner.py", file])
+    process = subprocess.run(["python", "vulnerabilities_scanner.py", file])
     exit_code = process.returncode
     print(f"Exit code for {file}: {exit_code}")
 
