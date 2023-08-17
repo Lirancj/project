@@ -34,7 +34,3 @@ jobs:
           echo "Running tests for $file"
           python vulnerabilities_scanner.py "$file"
         done
-      on_failure: |
-        # TODO Continue the loop
-      on_success: |
-        # Print `echo "Vulnerability was not detected in $file"` and exit 
