@@ -12,3 +12,5 @@ runs:
     - '-c'
     - |
       python /app/vulnerabilities_scanner.py ${{ join(inputs.files, ' ') }}
+  env:
+    GITHUB_WORKSPACE: ${{ github.workspace }}
