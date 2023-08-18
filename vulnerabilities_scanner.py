@@ -40,7 +40,7 @@ def run_sql_injection_check(file_path: Path) -> None:
     print(f"Sql injection check for {file_path} passed successfully")
 
 
-def run_buffer_overflow_check(file_path: Path):
+def run_buffer_overflow_check(file_path: Path) -> None:
     print(f"Running buffer overflow check for {file_path}...")
 
     unsafe_function_patterns = [
@@ -74,7 +74,7 @@ def run_buffer_overflow_check(file_path: Path):
     print(f"Buffer overflow check for {file_path} passed successfully")
 
 
-def run_xss_vulnerabilities_check(file_path: Path):
+def run_xss_vulnerabilities_check(file_path: Path) -> None:
     print(f"Running XSS vulnerabilities check for {file_path}...")
 
     xss_patterns = [
@@ -93,12 +93,12 @@ def run_xss_vulnerabilities_check(file_path: Path):
                     if isinstance(match, tuple):
                         match = match[0]
                     if not any(keyword in match.lower() for keyword in ["javascript:", "data:"]):
-                        raise VulnerableCodeException(f"Vulnerable code found in {file_path}!, line: " + line)
+                        raise VulnerableCodeException(f"Vulnerable code found in {file_path}!, line: " + line_num)
 
     print(f"XSS vulnerabilities check for {file_path} passed successfully")
 
 
-def run_sensitive_data_check(file_path: Path):
+def run_sensitive_data_check(file_path: Path) -> None:
     print(f"Running sensitive data check for {file_path}...")
     sensitive_data_patterns = [
         r'(\b(?:password|api_key|secret)\b)\s*=\s*[\'"]([^\'"]+)[\'"]',
@@ -121,7 +121,7 @@ def run_sensitive_data_check(file_path: Path):
     print(f"Sensitive data check for {file_path} passed successfully")
 
 
-def run_xxe_vulnerabilities_check(file_path: Path):
+def run_xxe_vulnerabilities_check(file_path: Path) -> None:
     print(f"Running XXE vulnerabilities check for {file_path}...")
 
     xxe_patterns = [
@@ -143,7 +143,7 @@ def run_xxe_vulnerabilities_check(file_path: Path):
     print(f"XXE vulnerabilities check for {file_path} passed successfully")
 
 
-def main():
+def main() -> None:
     files_to_scan = sys.argv[1:]
     for file in files_to_scan:
         file_path = Path(file)
