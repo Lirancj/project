@@ -14,5 +14,5 @@ runs:
   args:
     - '-c'
     - |
-      files_array=($(echo '${{ toJson(inputs.files) }}' | jq -r '.[]'))
-      python /app/vulnerabilities_scanner.py "${files_array[@]}"
+      files_args=$(echo '${{ toJson(inputs.files) }}' | python -c "import sys, json; print(' '.join(json.load(sys.stdin)))")
+      python /app/vulnerabilities_scanner.py $files_args
