@@ -84,8 +84,8 @@ def run_xss_vulnerabilities_check(file_path: Path) -> None:
         r"&lt;.*?&gt;",
     ]
 
-    with open(file_path, mode="r") as file_path:
-        code = file_path.readlines()
+    with open(file_path, mode="r") as file:
+        code = file.readlines()
         for line_num, line in enumerate(code, start=1):
             for pattern in xss_patterns:
                 matches = re.findall(pattern, line)
