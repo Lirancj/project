@@ -16,7 +16,7 @@ def run_all_tests(file_path: Path) -> None:
 
 
 def run_sql_injection_check(file_path: Path) -> None:
-    print("Running SQL injection check...")
+    print(f"Running SQL injection check for {file_path}...")
 
     secure_patterns = [
         r"\bSELECT\b.*\bFROM\b.*\bWHERE\b.*\=\s*\?",  # Secure SELECT format
@@ -37,11 +37,11 @@ def run_sql_injection_check(file_path: Path) -> None:
                 raise VulnerableCodeException(f"Vulnerable SQL query found in {file_path}!, line: " + line)
                 # Exit the loop on the first vulnerability
 
-    print("Sql injection check passed successfully")
+    print(f"Sql injection check for {file_path} passed successfully")
 
 
 def run_buffer_overflow_check(file_path: Path):
-    print("Running buffer overflow check...")
+    print(f"Running buffer overflow check for {file_path}...")
 
     unsafe_function_patterns = [
         r"\[\s*([a-zA-Z_]\w*)\s*\]\s*=\s*\w+\s*;",
@@ -71,11 +71,11 @@ def run_buffer_overflow_check(file_path: Path):
             if re.search(pattern, line):
                 raise VulnerableCodeException(f"Vulnerable function found in {file_path}!, line: " + line)
 
-    print("Buffer overflow check passed successfully")
+    print(f"Buffer overflow check for {file_path} passed successfully")
 
 
 def run_xss_vulnerabilities_check(file_path: Path):
-    print("Running XSS vulnerabilities check...")
+    print(f"Running XSS vulnerabilities check for {file_path}...")
 
     xss_patterns = [
         r"<script\b[^>]*>(.*?)<\/script>",
@@ -95,11 +95,11 @@ def run_xss_vulnerabilities_check(file_path: Path):
                     if not any(keyword in match.lower() for keyword in ["javascript:", "data:"]):
                         raise VulnerableCodeException(f"Vulnerable code found in {file_path}!, line: " + line)
 
-    print("XSS vulnerabilities check passed successfully")
+    print(f"XSS vulnerabilities check for {file_path} passed successfully")
 
 
 def run_sensitive_data_check(file_path: Path):
-    print("Running sensitive data check...")
+    print(f"Running sensitive data check for {file_path}...")
     sensitive_data_patterns = [
         r'(\b(?:password|api_key|secret)\b)\s*=\s*[\'"]([^\'"]+)[\'"]',
         r'AWS_ACCESS_KEY\s*=\s*[\'"]([^\'"]+)[\'"]',
@@ -118,11 +118,11 @@ def run_sensitive_data_check(file_path: Path):
             if re.search(pattern, line):
                 raise VulnerableCodeException(f"Sensitive data found in {file_path}!, line: " + line)
 
-    print("Sensitive data check passed successfully")
+    print(f"Sensitive data check for {file_path} passed successfully")
 
 
 def run_xxe_vulnerabilities_check(file_path: Path):
-    print("Running XXE vulnerabilities check...")
+    print(f"Running XXE vulnerabilities check for {file_path}...")
 
     xxe_patterns = [
         r'<!ENTITY\s+(\w+)\s+SYSTEM\s+[\'"](.*?)[\'"]>',
@@ -140,7 +140,7 @@ def run_xxe_vulnerabilities_check(file_path: Path):
             if re.search(pattern, line):
                 raise VulnerableCodeException(f"XXE vulnerability found in {file_path}!, line: " + line)
 
-    print("XXE vulnerabilities check passed successfully")
+    print(f"XXE vulnerabilities check for {file_path} passed successfully")
 
 
 def main():
