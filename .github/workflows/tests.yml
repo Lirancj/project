@@ -30,8 +30,6 @@ jobs:
     - name: Revert Push on Scan Failure
     if: failure()
     run: |
-      git config --global user.name "Leon Detector Bot"
-      git config --global user.email "actions@github.com"
       git revert HEAD --no-edit
       git push origin main
     
